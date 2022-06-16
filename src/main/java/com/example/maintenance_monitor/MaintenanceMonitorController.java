@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class MaintenanceMonitorController
 {
     MaintenancneMonitor m = new MaintenancneMonitor();
-    @RequestMapping("/messagequery")
-        public String messagequery()
+    @RequestMapping("/getMessage")
+        public String getMessage()
         {
             return m.getMessage();
         }
