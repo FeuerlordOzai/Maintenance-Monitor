@@ -14,5 +14,10 @@ public class MaintenancneMonitor {
         message = DEFAULT_MESSAGE;
     }
 
+    public void setMessage(String m)
+    {
+        message = m;
+    }
+
 
 }
