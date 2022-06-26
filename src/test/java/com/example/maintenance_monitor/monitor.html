@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+
+        <style>
+            h1 {
+
+            }
+
+            #monitor {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                text-align: center;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="monitor">
+            <h1>Maintenance Monitor</h1>
+            <p id="message"></p>
+            <p id="lastUpdate"></p>
+        </div>
+
+        <script type="text/javascript">
+            const apiUrl = 'http://localhost:8080/getMessage';
+
+            const getUpdate = () =>
+            {
+                fetch(apiUrl).then(response =>
+                    response.text()
+                ).then(data => {
+                    document.getElementById("lastUpdate").innerHTML = "Last update: " + new Date().toLocaleString();
+                    document.getElementById("message").innerHTML = data;
+                    document.body.style.background = (data !== ""
+                                                            ? "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,0,0,0.45281862745098034) 50%, rgba(255,255,255,1) 100%)"
+                                                            : "linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(18,135,15,0.45281862745098034) 50%, rgba(255,255,255,1) 100%");
+                }).catch(err => {
+                    console.log("error: " + err)
+                });
+            }
+
+            getUpdate();
+
+            setInterval(getUpdate, 5 * 60 * 1000); //refresh every 5 minutes
+        </script>
+    </body>
+</html>
